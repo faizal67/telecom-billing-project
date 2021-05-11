@@ -7,6 +7,9 @@ char passwords[][20]={"123","123","123","123","123"};
 char name[20],password[20];
 char admin_name[]={"xyz"};
 char admin_pass[]={"123"};
+long long  phone_no[]={9899483922,8887122744,7291049064,3594695879,4387643986};
+float data_used[]={39,40,20,33,10};
+float call_time[]={23,24,45,64,23};
 int id;
 void clrscr(void);
 int user_login();
@@ -53,11 +56,11 @@ int user_menu()
  {
   int choice;
   printf("*********************MAIN WINDOW********************\n");
-  printf(" * Profile                                                    press 1\n");
-  printf(" * Data used                                                  press 2\n");
-  printf(" * Voice call time                                            press 3\n");
-  printf(" * Subscriptions                                              press 4\n");
-  printf(" * Generate your Bill                                         press 5\n");
+  printf(" * Welcome Back %s \n",username[id]);
+  printf(" * %lld\n",phone_no[id]);
+  printf(" * Data consume(gb) :%f \n",data_used[id]);
+  printf(" * Call time(min) :%f\n",call_time[id]);
+  printf(" *  update data consume       update call time       \n");
  
  } 
 
@@ -97,7 +100,7 @@ return 0;
 
 int user_login()
  {
-  int flag=0,snake=4;
+  int flag=0,snake=3;
     printf("Username--");
     scanf("%s",&name);
       for (int i=0;i<5;i++)
@@ -118,14 +121,15 @@ int user_login()
               }
             else
               { 
-                if(snake==1)
+                if(snake==0)
                  {
                   printf("please enter the username again\n");
                   user_login();
                  }
-                snake--;
+                
                 printf("Wrong password\n");
                 printf("Please enter the password again\nyou have only %d attempt left\n",snake);
+                snake--;
                 goto a;
               }  
           }
