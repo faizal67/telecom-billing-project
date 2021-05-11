@@ -12,6 +12,10 @@ void clrscr(void);
 int user_login();
 int admin_login();
 int admin_menu();
+int user_menu();
+
+
+
 int main()
 { 
   void clrscr();
@@ -22,7 +26,7 @@ int main()
   a:
   {
     printf("\t\t\tLOGIN WINDOW\n");
-    printf("------------->USER<-----------*------------->USER<-----------\n");
+    printf("------------->USER<-----------*------------->ADMIN<-----------\n");
     printf("             press 1                        press 2\n");
     scanf("%d",&choice);
     switch (choice)
@@ -38,47 +42,24 @@ int main()
   printf("end of the program");
 }
 
-int user_login()
- {
-  int flag=0,snake=4;
-  printf("Username--");
-  scanf("%s",&name);
-  {
-   for (int i=0;i<5;i++)
-    {
-        if(strcmp(name, username[i])==0)
-        {
-          flag++;
-          a:
-          printf("Password--");
-          scanf("%s",&password);
-         if(strcmp(password, passwords[i])==0)
-         {
-           id=i;
-           printf("Welcome back %s\n",username[id]);
-           break;
-         }
-         else
-         { 
-            if(snake==1)
-             {
-               exit(0);
-               printf("please enter the username again\n");
-               user_login();
-             }
-             snake--;
-             printf("Wrong password\nPlease enter the password again\nyou have only %d attempt left\n",snake);
-              goto a;
-         }    
-        }
-    }
-  }
-  if(flag==0)
-  {
-    printf("please enter the correct username\n");
-    user_login();
-  }
+
+int admin_menu()
+{
+   printf("this is a admin menu\n");
 }
+
+
+int user_menu()
+ {
+  int choice;
+  printf("*********************MAIN WINDOW********************\n");
+  printf(" * Profile                                                    press 1\n");
+  printf(" * Data used                                                  press 2\n");
+  printf(" * Voice call time                                            press 3\n");
+  printf(" * Subscriptions                                              press 4\n");
+  printf(" * Generate your Bill                                         press 5\n");
+ 
+ } 
 
 int admin_login()
 {
@@ -103,7 +84,8 @@ int admin_login()
         {
           printf("Please enter the correct password\n");
         }
-      }  
+      }
+    break;  
     }    
    else
    {
@@ -113,33 +95,56 @@ int admin_login()
 return 0;
 }
 
-int admin_menu()
-{
-   printf("this is a menu");
+int user_login()
+ {
+  int flag=0,snake=4;
+    printf("Username--");
+    scanf("%s",&name);
+      for (int i=0;i<5;i++)
+       {
+         if(strcmp(name, username[i])==0)
+         {
+          flag++;
+          {
+            a:
+            printf("Password--");
+            scanf("%s",&password);
+            if(strcmp(password, passwords[i])==0)
+              {
+                id=i;
+                printf("Welcome back %s\n",username[id]);
+                user_menu();
+                break;
+              }
+            else
+              { 
+                if(snake==1)
+                 {
+                  printf("please enter the username again\n");
+                  user_login();
+                 }
+                snake--;
+                printf("Wrong password\n");
+                printf("Please enter the password again\nyou have only %d attempt left\n",snake);
+                goto a;
+              }  
+          }
+         }
+          
+        }
+   if(flag==0)
+   {
+     user_login();
+   }      
+
+return 0;   
 }
-// int main_menu()
-// {
-//   int choice;
-//   printf("*********************MAIN WINDOW********************\n");
-//   printf(" * Profile                                                    press 1\n");
-//   printf(" * Data used                                                  press 2\n");
-//   printf(" * Voice call time                                            press 3\n");
-//   printf(" * Subscriptions                                              press 4\n");
-//   printf(" * Generate your Bill                                         press 5\n");
-//   scanf("%d",&choice);
-//   switch(choice)
-//   {
-//     case 1: profile();
-//             break;
-//     case 2: data_used();
-//             break;
-//     case 3: call_time();
-//             break;
-//     case 4: generate_bill();
-//             break;
-//   }
-// return 0;
-// } 
+
+
+
+
+
+
 
 
 
