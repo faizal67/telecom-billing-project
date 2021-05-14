@@ -1,7 +1,4 @@
-#include <stdio.h> 
-#include <conio.h>
-#include <string.h>
-#include <stdlib.h>
+
 char username[][20]={"faizal","kushagra","salman","nikita","pragya"};
 char passwords[][20]={"123","123","123","123","123"};
 char name[20],password[20];
