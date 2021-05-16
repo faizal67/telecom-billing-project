@@ -124,6 +124,71 @@ int user_menu()
     }choice_2=1; 
   break;
 
+  case 3:
+    printf("Your current  caller tune status : ");
+    {
+    if(user_tune[id]==1)
+      printf("Active\n");
+    else 
+      printf("Inactive\n");  
+    }
+    printf("What you want  (Activate or Deactivate) \n");
+    printf("                 press 1      press 2\n");
+    {
+      int choice;
+      scanf("%d",&choice);
+      if(choice==1)
+        user_tune[id]=1;
+      else
+        user_tune[id]=0;  
+
+    }
+    
+    printf(" Update  successfull  \n");
+
+    while(1)
+    {
+      printf("Press zero to back :");
+      scanf("%d",&choice_2);
+      if (choice_2==0)
+      {
+        user_menu();
+        break;
+      }  
+      else 
+      printf("Please Enter correct value\n");
+    }choice_2=1; 
+  break;
+
+  case 4:
+    printf("Your current  ott subscription :%s\n ",subs[user_sub[id]]);
+    printf("Which ott subscription you want to take -->\n");
+    for(int i=0;i<6;i++)
+    { 
+     printf("  * %s  press  %d\n",subs[i],i+1);
+    }
+    {
+      int choice;
+      scanf("%d",&choice);
+      user_sub[id]=choice-1;
+    }
+    
+    printf(" Update  successfull  \n");
+
+    while(1)
+    {
+      printf("Press zero to back :");
+      scanf("%d",&choice_2);
+      if (choice_2==0)
+      {
+        user_menu();
+        break;
+      }  
+      else 
+      printf("Please Enter correct value\n");
+    }choice_2=1; 
+  break;
+
   default: 
   printf("Enter the correct choice");
     break;
