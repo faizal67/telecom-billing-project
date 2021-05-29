@@ -54,6 +54,7 @@ void generate_bill(int id)
 { 
   printf("\e[1;1H\e[2J");
   system("Color A");
+  int choice;
   float b_total,a_total,ott_charge;
   if(user_sub[id]==1)
   ott_charge=499;
@@ -100,7 +101,13 @@ void generate_bill(int id)
   printf("     * Discount :                                                                         Rs %d\n\n",discount);
   printf("     * Total Payable amount :                                                             Rs %0.2f\n",(b_total+((b_total/100)*18))-discount);
   printf("------------------------------------------------------------------------------------------------------------\n");
-  
+  while(1)
+  {
+  printf("press 0 to exit  ");
+  scanf("%d",&choice);
+  if (choice==0)
+   exit(0);
+  }
 }
 
 
@@ -112,14 +119,16 @@ int admin_menu()
    printf("admin menu is not yet complete\n");
    printf("Work in progress...\n It will complete soon...\n");
    a:
-   printf("\n\nPress zero to back");
-   scanf("%d",choice);
-   switch(0)
+   printf("\n\nPress zero to back  ");
+   scanf("%d",&choice);
+   switch(choice)
    {
      case 0:
-     main();
+     {
+       main();
      break;
-     defalt: 
+     }
+     default: 
      goto a;
    }
   
