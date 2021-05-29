@@ -96,8 +96,6 @@ void generate_bill(int id)
   printf("     * Discount :                                                                         Rs %d\n\n",discount);
   printf("     * Total Payable amount :                                                             Rs %0.2f\n",(b_total+((b_total/100)*18))-discount);
   printf("------------------------------------------------------------------------------------------------------------\n");
- 
-
 
 }
 
@@ -251,7 +249,12 @@ int user_menu()
   break;
 
   case 6:
+   main();
+   break;
+
+  case 0:
    exit(0);
+
 
   default: 
   printf("Enter the correct choice");
