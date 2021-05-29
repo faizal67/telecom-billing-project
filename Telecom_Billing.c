@@ -43,7 +43,7 @@ int main()
         break;
         case 2:admin_login();
         break;
-        default: system("Color 4");printf("Wrong input enter correct input \n");
+        default: system("Color C");printf("Hey!!! Type the correct input. \n\n");
         goto a;
       }
   }
@@ -73,13 +73,17 @@ void generate_bill(int id)
   {
     ott_charge=180;
   }
+  else if(user_sub[id]==6)
+  {
+    ott_charge=299;
+  }
   else
   ott_charge=0;
   b_total=(data_used[id]*16)+(call_time[id]*1.2)+(user_tune[id]*78)+(ott_charge);
   printf("\n");
   printf("--------------------------------------------Telecome Bill---------------------------------------------------\n");
-  printf("     Name : %-20s                                                                                \n",username[id]);
-  printf("     Mobile no: %-20lld                                                                            \n",phone_no[id]);
+  printf("     Name : %s\n",username[id]);
+  printf("     Mobile no: %lld\n",phone_no[id]);
   printf("------------------------------------------------------------------------------------------------------------\n");
   printf("     * Data charges:                                                                      Rs %0.2f               \n",data_used[id]*16);
   printf("     * Call charges:                                                                      Rs %0.2f \n\n",(call_time[id]*1.2));
@@ -96,13 +100,29 @@ void generate_bill(int id)
   printf("     * Discount :                                                                         Rs %d\n\n",discount);
   printf("     * Total Payable amount :                                                             Rs %0.2f\n",(b_total+((b_total/100)*18))-discount);
   printf("------------------------------------------------------------------------------------------------------------\n");
-
+  
 }
 
 
 int admin_menu()
 { 
-   printf("this is a admin menu\n");
+  int choice;
+  printf("\e[1;1H\e[2J");
+  system("Color 9");
+   printf("admin menu is not yet complete\n");
+   printf("Work in progress...\n It will complete soon...\n");
+   a:
+   printf("\n\nPress zero to back");
+   scanf("%d",choice);
+   switch(0)
+   {
+     case 0:
+     main();
+     break;
+     defalt: 
+     goto a;
+   }
+  
 }
 
 
@@ -111,7 +131,7 @@ int user_menu()
   printf("\e[1;1H\e[2J");
   int choice,choice_2;
   float up_data,up_call;
-  system("Color 3");
+  system("Color 9");
   printf("*********************MAIN WINDOW********************                                                         logout(6)        exit(0)    \n");
   printf(" * Welcome Back %s \n",username[id]);
   printf(" * %lld\n",phone_no[id]);
@@ -125,7 +145,7 @@ int user_menu()
     else 
       printf("Inactive\n");  
   }
-  printf(" * Active subscription :%s\n\n",subs[user_sub[id]]);
+  printf(" * Active OTT subscription :%s\n\n",subs[user_sub[id]]);
   printf("----------------------------------------------------------------------------------------------------------------------------------------\n");
   printf("  Update data consume     update call time     Activate/Deactivate caller tune      Change OTT subscription      Generate Bill\n");
   printf("       Press 1                Press 2                     Press 3                           Press 4                  press 5  \n ");
@@ -302,7 +322,7 @@ return 0;
 int user_login()
  {
   int flag=0,snake=3;
-    printf("Username--");
+    printf("Username-->");
     scanf("%s",&name);
       for (int i=0;i<5;i++)
        {
@@ -323,11 +343,16 @@ int user_login()
               { 
                 if(snake==0)
                  {
-                  printf("please enter the username again\n");
-                  user_login();
+                   main();
+                  // printf("\n\nyou have used all attempts!!!!! \n");
+                  // system("Color A");
+                  // printf("Please enter the username again\n");
+                  // user_login();
                  }
                 
-                printf("Wrong password\n");
+                  system("Color C");
+                printf("\n\n");  
+                printf("Wrong password!!!\n");
                 printf("Please enter the password again\nyou have only %d attempt left\n",snake);
                 snake--;
                 goto a;
@@ -338,6 +363,7 @@ int user_login()
         }
    if(flag==0)
    {
+     printf("You typed wrong username please try again\n");
      user_login();
    }      
 
