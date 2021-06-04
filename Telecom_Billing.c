@@ -20,6 +20,7 @@ struct client c[5]={{"faizal","123",9899483922,39,23,1,0},
                       {"kushagra","123",8887122744,40,24,4,1},
                       {"nikita","123",3594695879,33,63,1,0}};
 char subs[][20]={"No subscription","Netflix","Disney+ Hotstar","Amazon prime video","ZEE5","SonyLIV"};
+float subs_charge[]={000,499,299,129,355,180,299};
 char admin_name[]={"xyz"};
 char admin_pass[]={"123"};
 
@@ -66,32 +67,8 @@ void generate_bill(int id)
   printf("\e[1;1H\e[2J");
   system("Color A");
   int choice;
-  float b_total,a_total,ott_charge;
-  if(c[id].user_sub==1)
-  ott_charge=499;
-  else if(c[id].user_sub==2)
-  {
-    ott_charge=299;
-  }
-  else if(c[id].user_sub==3)
-  {
-    ott_charge=129;
-  }
-  else if(c[id].user_sub==4)
-  {
-    ott_charge=355;
-  }
-  else if(c[id].user_sub==5)
-  {
-    ott_charge=180;
-  }
-  else if(c[id].user_sub==6)
-  {
-    ott_charge=299;
-  }
-  else
-  ott_charge=0;
-  b_total=(c[id].data_used*16)+(c[id].call_time*1.2)+(c[id].user_tune*78)+(ott_charge);
+  float b_total,a_total;
+  b_total=(c[id].data_used*16)+(c[id].call_time*1.2)+(c[id].user_tune*78)+(subs_charge[c[id].user_sub]);
   printf("\n");
   printf("--------------------------------------------Telecome Bill---------------------------------------------------\n");
   printf("     Name : %s\n",c[id].username);
@@ -101,7 +78,7 @@ void generate_bill(int id)
   printf("     * Call charges:                                                                      Rs %0.2f \n\n",(c[id].call_time*1.2));
   printf("     * Subscriptions:-\n");
   printf("     --> Caller tune:                                                                     Rs %d\n",c[id].user_tune*78);
-  printf("     --> Add on charges(OTT):                                                             Rs %0.2f\n\n",ott_charge); 
+  printf("     --> Add on charges(OTT):                                                             Rs %0.2f\n\n",subs_charge[c[id].user_sub]); 
   printf("     * Additional Charges:-\n");
   printf("     --> One time charges:                                                                Rs 0.00\n");
   printf("     --> International Roaming charges:                                                   Rs 0.00\n\n");
@@ -260,11 +237,16 @@ int user_menu()
     printf("Which ott subscription you want to take -->\n");
     for(int i=0;i<6;i++)
     { 
-     printf("  * %s  press  %d\n",subs[i],i+1);
+     printf("  * %-30s                   Rs %0.2f           press  %d\n",subs[i],subs_charge[i],i+1);
     }
     {
       int choice;
+      c:
       scanf("%d",&choice);
+      if(choice<=0||choice>=7)
+      {
+        goto c;
+      }
       c[id].user_sub=choice-1;
     }
     
