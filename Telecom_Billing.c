@@ -5,25 +5,27 @@
 
 struct client
 {
-  
- 
+ char username[20];
+ char passwords[20];
+ long long int phone_no;
+ float data_used;
+ float call_time;
+ int user_sub;
+ int user_tune;
 };
 
-char username[][20]={"faizal","kushagra","salman","nikita","pragya"};
-char passwords[][20]={"123","123","123","123","123"};
+struct client c[5]={{"faizal","123",9899483922,39,23,1,0},
+                      {"pragya","123",0001010101,23,6,3,1},
+                      {"salman","123",7291049064,20,45,0,0},
+                      {"kushagra","123",8887122744,40,24,4,1},
+                      {"nikita","123",3594695879,33,63,1,0}};
 char subs[][20]={"No subscription","Netflix","Disney+ Hotstar","Amazon prime video","ZEE5","SonyLIV"};
-
-char name[20],password[20];
 char admin_name[]={"xyz"};
 char admin_pass[]={"123"};
-long long int phone_no[10]={9899483922,8887122744,7291049064,3594695879,4387643986};
-float data_used[]={39,40,20,33,10};
-float call_time[]={23,24,45,64,23};
-int user_sub[]={1,4,0,1,0}; // user subscription 
-int user_tune[]={0,1,1,0,0};//caller tune
+
 int id;
 int discount=0;
-int user_login();
+int user_login(struct client *c);
 int admin_login();
 int admin_menu();
 int user_menu();
@@ -31,9 +33,12 @@ void generate_bill(int);
 
 int main()
 { 
+  
   printf("\e[1;1H\e[2J");
   system("Color D");
   int choice;
+  
+  
   printf("***************************************************************\n");
   printf("--------------------------WELCOME TO THE TELECOME BILLING SYSTEM----------------------------\n");
   printf("                         ******************************************************************\n\n");
@@ -45,9 +50,9 @@ int main()
     scanf("%d",&choice);
     switch (choice)
       {
-        case 1:user_login();
+        case 1:user_login(c);
         break;
-        case 2:admin_login();
+        case 2:admin_login(c);
         break;
         default: system("Color C");printf("Hey!!! Type the correct input. \n\n");
         goto a;
@@ -62,40 +67,40 @@ void generate_bill(int id)
   system("Color A");
   int choice;
   float b_total,a_total,ott_charge;
-  if(user_sub[id]==1)
+  if(c[id].user_sub==1)
   ott_charge=499;
-  else if(user_sub[id]==2)
+  else if(c[id].user_sub==2)
   {
     ott_charge=299;
   }
-  else if(user_sub[id]==3)
+  else if(c[id].user_sub==3)
   {
     ott_charge=129;
   }
-  else if(user_sub[id]==4)
+  else if(c[id].user_sub==4)
   {
     ott_charge=355;
   }
-  else if(user_sub[id]==5)
+  else if(c[id].user_sub==5)
   {
     ott_charge=180;
   }
-  else if(user_sub[id]==6)
+  else if(c[id].user_sub==6)
   {
     ott_charge=299;
   }
   else
   ott_charge=0;
-  b_total=(data_used[id]*16)+(call_time[id]*1.2)+(user_tune[id]*78)+(ott_charge);
+  b_total=(c[id].data_used*16)+(c[id].call_time*1.2)+(c[id].user_tune*78)+(ott_charge);
   printf("\n");
   printf("--------------------------------------------Telecome Bill---------------------------------------------------\n");
-  printf("     Name : %s\n",username[id]);
-  printf("     Mobile no: %lld\n",phone_no[id]);
+  printf("     Name : %s\n",c[id].username);
+  printf("     Mobile no: %lld\n",c[id].phone_no);
   printf("------------------------------------------------------------------------------------------------------------\n");
-  printf("     * Data charges:                                                                      Rs %0.2f               \n",data_used[id]*16);
-  printf("     * Call charges:                                                                      Rs %0.2f \n\n",(call_time[id]*1.2));
+  printf("     * Data charges:                                                                      Rs %0.2f               \n",c[id].data_used*16);
+  printf("     * Call charges:                                                                      Rs %0.2f \n\n",(c[id].call_time*1.2));
   printf("     * Subscriptions:-\n");
-  printf("     --> Caller tune:                                                                     Rs %d\n",user_tune[id]*78);
+  printf("     --> Caller tune:                                                                     Rs %d\n",c[id].user_tune*78);
   printf("     --> Add on charges(OTT):                                                             Rs %0.2f\n\n",ott_charge); 
   printf("     * Additional Charges:-\n");
   printf("     --> One time charges:                                                                Rs 0.00\n");
@@ -148,19 +153,19 @@ int user_menu()
   float up_data,up_call;
   system("Color 9");
   printf("*********************MAIN WINDOW********************                                                         logout(6)        exit(0)    \n");
-  printf(" * Welcome Back %s \n",username[id]);
-  printf(" * %lld\n",phone_no[id]);
-  printf(" * Data consume(gb) :%.2f \n",data_used[id]);
-  printf(" * Call time(min) :%.2f\n",call_time[id]);
+  printf(" * Welcome Back %s \n",c[id].username);
+  printf(" * %lld\n",c[id].phone_no);
+  printf(" * Data consume(gb) :%.2f \n",c[id].data_used);
+  printf(" * Call time(min) :%.2f\n",c[id].call_time);
 
   printf(" * Callertune :");
   {
-    if(user_tune[id]==1)
+    if(c[id].user_tune==1)
       printf("Active\n");
     else 
       printf("Inactive\n");  
   }
-  printf(" * Active OTT subscription :%s\n\n",subs[user_sub[id]]);
+  printf(" * Active OTT subscription :%s\n\n",subs[c[id].user_sub]);
   printf("----------------------------------------------------------------------------------------------------------------------------------------\n");
   printf("  Update data consume     update call time     Activate/Deactivate caller tune      Change OTT subscription      Generate Bill\n");
   printf("       Press 1                Press 2                     Press 3                           Press 4                  press 5  \n ");
@@ -172,10 +177,10 @@ int user_menu()
   {
   case 1:
     system("Color A");
-    printf("Your current data consumption is :%.2f \n",data_used[id]);
+    printf("Your current data consumption is :%.2f \n",c[id].data_used);
     printf("How much you want to add data value : ");
     scanf("%f",&up_data);
-    data_used[id]+=up_data;
+    c[id].data_used+=up_data;
     printf(" successfully data updated \n\n");
 
     while(1)
@@ -194,10 +199,10 @@ int user_menu()
   
   case 2:
     system("Color C");
-    printf("Your current  call time is :%.2f \n",call_time[id]);
+    printf("Your current  call time is :%.2f \n",c[id].call_time);
     printf("how much you want to add call time : ");
     scanf("%f",&up_call);
-    call_time[id]+=up_call;
+    c[id].call_time+=up_call;
     printf(" successfully call time  updated \n");
 
     while(1)
@@ -217,7 +222,7 @@ int user_menu()
   case 3:
     printf("Your current  caller tune status : ");
     {
-    if(user_tune[id]==1)
+    if(c[id].user_tune==1)
       printf("Active\n");
     else 
       printf("Inactive\n");  
@@ -228,9 +233,9 @@ int user_menu()
       int choice;
       scanf("%d",&choice);
       if(choice==1)
-        user_tune[id]=1;
+        c[id].user_tune=1;
       else
-        user_tune[id]=0;  
+        c[id].user_tune=0;  
 
     }
     
@@ -251,7 +256,7 @@ int user_menu()
   break;
 
   case 4:
-    printf("Your current  ott subscription :%s\n ",subs[user_sub[id]]);
+    printf("Your current  ott subscription :%s\n ",subs[c[id].user_sub]);
     printf("Which ott subscription you want to take -->\n");
     for(int i=0;i<6;i++)
     { 
@@ -260,7 +265,7 @@ int user_menu()
     {
       int choice;
       scanf("%d",&choice);
-      user_sub[id]=choice-1;
+      c[id].user_sub=choice-1;
     }
     
     printf(" Update  successfull  \n");
@@ -334,21 +339,22 @@ int admin_login()
 return 0;
 }
 
-int user_login()
+int user_login(struct client *c)
  {
+   char name[20],password[20];
   int flag=0,snake=3;
     printf("Username-->");
     scanf("%s",&name);
       for (int i=0;i<5;i++)
        {
-         if(strcmp(name, username[i])==0)
+         if(strcmp(name,c[i].username)==0)
          {
           flag++;
           {
             a:
             printf("Password--");
             scanf("%s",&password);
-            if(strcmp(password, passwords[i])==0)
+            if(strcmp(password, c[i].passwords)==0)
               {
                 id=i;
                 user_menu();
@@ -379,7 +385,7 @@ int user_login()
    if(flag==0)
    {
      printf("You typed wrong username please try again\n");
-     user_login();
+     user_login(c);
    }      
 
 return 0;   
