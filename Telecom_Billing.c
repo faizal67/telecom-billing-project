@@ -3,30 +3,30 @@
 #include <string.h>
 #include <stdlib.h>
 
-struct client
+struct client                                                                       //declaration of structure
 {
  char username[20];
  char passwords[20];
  long long int phone_no;
- float data_used;
+ float data_used;                                                                   //structure variables
  float call_time;
- int user_sub;
- int user_tune;
+ int user_sub;                                                                      //for store user subscription code
+ int user_tune;                                                                     //for store user callertune  0--->deactive    1---->active
 };
 
-struct client c[5]={{"faizal","123",9899483922,39,23,1,0},
+struct client c[5]={{"faizal","123",9899483922,39,23,1,0},                          //(name,password,phone no,data,calltime,subscription code,callertune)
                       {"pragya","123",0001010101,23,6,3,1},
-                      {"salman","123",7291049064,20,45,0,0},
+                      {"salman","123",7291049064,20,45,0,0},                        //initialisation of structure fuction
                       {"kushagra","123",8887122744,40,24,4,1},
                       {"nikita","123",3594695879,33,63,1,0}};
-char subs[][20]={"No subscription","Netflix","Disney+ Hotstar","Amazon prime video","ZEE5","SonyLIV"};
-float subs_charge[]={000,499,299,129,355,180,299};
+char subs[][20]={"No subscription","Netflix","Disney+ Hotstar","Amazon prime video","ZEE5","SonyLIV"};    //defination of subscription code
+float subs_charge[]={000,499,299,129,355,180,299};                                   //subscription charges
 char admin_name[]={"xyz"};
 char admin_pass[]={"123"};
 
-int id;
+int id;                                                                              //uniqe id for all user
 int discount=0;
-int user_login();
+int user_login();   
 int admin_login();
 int admin_menu();
 int user_menu();
@@ -35,11 +35,10 @@ void generate_bill(int);
 int main()
 { 
   
-  printf("\e[1;1H\e[2J");
-  system("Color D");
+  printf("\e[1;1H\e[2J");   //to clear the screen
+  system("Color D");        //to change the font color
   int choice;
-  
-  
+
   printf("***************************************************************\n");
   printf("--------------------------WELCOME TO THE TELECOME BILLING SYSTEM----------------------------\n");
   printf("                         ******************************************************************\n\n");
@@ -67,7 +66,7 @@ void generate_bill(int id)
   printf("\e[1;1H\e[2J");
   system("Color A");
   int choice;
-  float b_total,a_total;
+  float b_total;       //b=befor adding gst    
   b_total=(c[id].data_used*16)+(c[id].call_time*1.2)+(c[id].user_tune*78)+(subs_charge[c[id].user_sub]);
   printf("\n");
   printf("--------------------------------------------Telecome Bill---------------------------------------------------\n");
@@ -126,7 +125,7 @@ int admin_menu()
 int user_menu()
  {
   printf("\e[1;1H\e[2J");
-  int choice,choice_2;
+  int choice,choice_2;           
   float up_data,up_call;
   system("Color 9");
   printf("*********************MAIN WINDOW********************                                                         logout(6)        exit(0)    \n");
