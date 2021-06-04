@@ -25,7 +25,7 @@ char admin_pass[]={"123"};
 
 int id;
 int discount=0;
-int user_login(struct client *c);
+int user_login();
 int admin_login();
 int admin_menu();
 int user_menu();
@@ -50,9 +50,9 @@ int main()
     scanf("%d",&choice);
     switch (choice)
       {
-        case 1:user_login(c);
+        case 1:user_login();
         break;
-        case 2:admin_login(c);
+        case 2:admin_login();
         break;
         default: system("Color C");printf("Hey!!! Type the correct input. \n\n");
         goto a;
@@ -339,7 +339,7 @@ int admin_login()
 return 0;
 }
 
-int user_login(struct client *c)
+int user_login()
  {
    char name[20],password[20];
   int flag=0,snake=3;
