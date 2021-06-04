@@ -3,6 +3,12 @@
 #include <string.h>
 #include <stdlib.h>
 
+struct client
+{
+  
+ 
+};
+
 char username[][20]={"faizal","kushagra","salman","nikita","pragya"};
 char passwords[][20]={"123","123","123","123","123"};
 char subs[][20]={"No subscription","Netflix","Disney+ Hotstar","Amazon prime video","ZEE5","SonyLIV"};
