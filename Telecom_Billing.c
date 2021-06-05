@@ -50,7 +50,7 @@ int main()
     scanf("%d",&choice);
     switch (choice)
       {
-        case 1:user_login();
+        case 1:user_login(); 
         break;
         case 2:admin_login();
         break;
