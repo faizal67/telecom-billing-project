@@ -3,7 +3,9 @@ Project Objective: To build a project this can be used by a
 target ‘Telecom Company’ for various tasks including 
 Customer account addition, updating of details, usage 
 management and billing. 
-Language used: C
+
+
+Language used: C 
 Project Structure:
 • No of Users: 2 (ADMIN & CLIENT VERSION)
 • Function access per user: 
